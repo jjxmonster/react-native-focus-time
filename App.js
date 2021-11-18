@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet,Platform } from 'react-native';
 
 import { Focus } from './src/features/focus/Focus';
+import { Timer } from './src/features/timer/Timer';
+
+import { colors } from './src/utils/colors';
+import { spacing } from './src/utils/sizes';
 
 export default function App() {
-  const [focusSubject, setFocusSubject] = useState(null);
+  const [focusSubject, setFocusSubject] = useState('learn');
   return (
     <View style={styles.container}>
       {focusSubject ? (
         <>
-          <Text>{focusSubject}</Text>
-    
+          <Timer focusSubject={focusSubject} />
         </>
       ) : (
         <Focus addSubject={setFocusSubject} />
@@ -22,6 +25,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#252250',
+    backgroundColor: colors.darkBlue,
+    paddingTop:Platform.OS=== 'ios'? spacing.md : spacing.lg
   },
 });

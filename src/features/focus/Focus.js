@@ -4,6 +4,9 @@ import { TextInput } from 'react-native-paper';
 
 import { RoundedButton } from '../../components/RoundedButton';
 
+import {fontSizes, spacing} from '../../utils/sizes'
+
+
 export const Focus = ({ addSubject }) => {
   const [tempItem, setTempItem] = useState(null);
 
@@ -33,19 +36,19 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 0.5,
-    padding: 16,
+    padding: spacing.md,
     justifyContent: 'center',
   },
   title: {
     color: 'white',
-    fontSize: 24,
+    fontSize: fontSizes.lg,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   input: {
     backgroundColor: 'white',
     flex: 1,
-    marginRight: 20,
+    marginRight: spacing.md,
   },
   inputContainer: {
     alignItems: 'center',
