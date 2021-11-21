@@ -4,21 +4,32 @@ import { ProgressBar } from 'react-native-paper';
 
 import { Countdown } from '../../components/CountDown';
 import { RoundedButton } from '../../components/RoundedButton';
+import { Timing } from './Timing';
 
 import { spacing } from '../../utils/sizes';
 
 export const Timer = ({ focusSubject }) => {
    const [isStarted, setIsStarted] = useState(false);
    const [progress, setProgress] = useState(1);
+   const [minutes, setMinutes] = useState(0.1);
 
    const onProgress = progress => {
       setProgress(progress);
+   };
+   const changeTime = min => {
+      setMinutes(min);
+      setProgress(1);
+      setIsStarted(false);
    };
 
    return (
       <View style={styles.container}>
          <View style={styles.countdown}>
-            <Countdown isPaused={!isStarted} onProgress={onProgress} />
+            <Countdown
+               minutes={minutes}
+               isPaused={!isStarted}
+               onProgress={onProgress}
+            />
          </View>
          <View style={{ paddingTop: spacing.xxl }}>
             <Text style={styles.title}>Focusing on:</Text>
@@ -32,6 +43,10 @@ export const Timer = ({ focusSubject }) => {
                   height: 10,
                }}
             />
+         </View>
+
+         <View style={styles.buttonWrapper}>
+            <Timing onChangeTime={changeTime} />
          </View>
          <View style={styles.buttonWrapper}>
             {isStarted ? (
@@ -73,5 +88,6 @@ const styles = StyleSheet.create({
       padding: 50,
       justifyContent: 'center',
       alignItems: 'center',
+      flexDirection: 'row',
    },
 });

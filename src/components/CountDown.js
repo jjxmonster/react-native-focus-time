@@ -8,8 +8,8 @@ import { colors } from '../utils/colors';
 const minutesToMillis = min => min * 1000 * 60;
 const formatTime = time => (time < 10 ? `0${time}` : time);
 
-export const Countdown = ({ minutes = 20, isPaused, onProgress }) => {
-   const [millis, setMillis] = useState(minutesToMillis(minutes));
+export const Countdown = ({ minutes = 0.1, isPaused, onProgress }) => {
+   const [millis, setMillis] = useState(null);
 
    const interval = useRef(null);
 
@@ -28,7 +28,11 @@ export const Countdown = ({ minutes = 20, isPaused, onProgress }) => {
    const seconds = Math.floor((millis / 1000) % 60);
 
    useEffect(() => {
+      setMillis(minutesToMillis(minutes));
+   }, [minutes]);
+   useEffect(() => {
       if (isPaused) {
+         if (interval.current) clearInterval(interval.current);
          return;
       }
 
