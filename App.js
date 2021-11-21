@@ -9,11 +9,16 @@ import { spacing } from './src/utils/sizes';
 
 export default function App() {
    const [focusSubject, setFocusSubject] = useState('learn');
+
+   const onTimerEnd = () => {
+      setFocusSubject(null);
+   };
+
    return (
       <View style={styles.container}>
          {focusSubject ? (
             <>
-               <Timer focusSubject={focusSubject} />
+               <Timer focusSubject={focusSubject} onTimerEnd={onTimerEnd} />
             </>
          ) : (
             <Focus addSubject={setFocusSubject} />
