@@ -12,10 +12,6 @@ import { List } from 'react-native-paper';
 import { fontSizes, spacing } from '../../utils/sizes';
 import { RoundedButton } from '../../components/RoundedButton';
 
-const HistoryItem = ({ item }) => {
-   return <Text style={styles(item.status).historyItem}>{item.subject}</Text>;
-};
-
 export const FocusHistory = ({ focusHistory, onClear }) => {
    const clearHistory = () => {
       onClear();
@@ -24,7 +20,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
    return (
       <>
          <SafeAreaView style={{ flex: 0.5, alignItems: 'center' }}>
-            {!!focusHistory.length && (
+            {focusHistory.length > 0 && (
                <>
                   <List.Accordion
                      style={{
@@ -35,6 +31,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
                   >
                      {focusHistory.map(item => (
                         <List.Item
+                           key={item.key}
                            left={props => (
                               <List.Icon
                                  {...props}

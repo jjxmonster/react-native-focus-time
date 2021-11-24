@@ -20,15 +20,18 @@ export default function App() {
    const [focusHistory, setFocusHistory] = useState([]);
 
    const addFocusHistorySubjectWithState = (subject, status) => {
-      setFocusHistory([...focusHistory, { subject, status }]);
+      setFocusHistory([
+         ...focusHistory,
+         { key: String(focusHistory.length + 1), subject, status },
+      ]);
    };
    const onTimerEnd = () => {
       addFocusHistorySubjectWithState(focusSubject, STATUSES.COMPLETE);
       setFocusSubject(null);
    };
    const onCancelled = () => {
-      setFocusSubject(null);
       addFocusHistorySubjectWithState(focusSubject, STATUSES.CANCELLED);
+      setFocusSubject(null);
    };
    const onClear = () => {
       setFocusHistory([]);
@@ -48,7 +51,7 @@ export default function App() {
       try {
          const history = await AsyncStorage.getItem('focusHistory');
          if (history && JSON.parse(history).length) {
-            setFocusHistory(JSON.stringify(history));
+            setFocusHistory(JSON.parse(history));
          }
       } catch (error) {
          console.log(error);
@@ -61,6 +64,7 @@ export default function App() {
    useEffect(() => {
       saveFocusHistory();
    }, [focusHistory]);
+
    return (
       <View style={styles.container}>
          {focusSubject ? (
@@ -72,10 +76,10 @@ export default function App() {
                />
             </>
          ) : (
-            <>
+            <View style={{ flex: 0.5 }}>
                <Focus addSubject={setFocusSubject} />
                <FocusHistory focusHistory={focusHistory} onClear={onClear} />
-            </>
+            </View>
          )}
       </View>
    );
