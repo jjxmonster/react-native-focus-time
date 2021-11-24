@@ -16,7 +16,6 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
    const clearHistory = () => {
       onClear();
    };
-
    return (
       <>
          <SafeAreaView style={{ flex: 0.5, alignItems: 'center' }}>
@@ -24,7 +23,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
                <>
                   <List.Accordion
                      style={{
-                        width: '90vw',
+                        width: 300,
                      }}
                      title="Things we've focused on"
                      titleStyle={{ color: '#5E84E2' }}
@@ -39,19 +38,19 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
                                  color={item.status > 1 ? 'red' : 'green'}
                               />
                            )}
-                           style={{ background: '#5E84E2' }}
+                           style={{ backgroundColor: '#5E84E2' }}
                            title={item.subject}
                            titleStyle={{
                               color: 'white',
-                              fontSize: '20px',
+                              fontSize: 20,
                            }}
                         />
                      ))}
-                     <TouchableOpacity onPress={() => onClear()}>
+                     <TouchableOpacity onPress={clearHistory}>
                         <List.Item
                            style={{
-                              background: 'red',
-                              height: '50px',
+                              backgroundColor: 'red',
+                              height: 50,
                               padding: 0,
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -59,7 +58,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
                            title={'CLEAR'}
                            titleStyle={{
                               color: 'white',
-                              fontSize: '15px',
+                              fontSize: 15,
                            }}
                         />
                      </TouchableOpacity>
